@@ -1,0 +1,16 @@
+GET http://localhost:3000/api/v1/points
+
+###
+GET http://localhost:3000/api/v1/points/2
+
+###
+PATCH http://localhost:3000/api/v1/points/2
+
+###
+DELETE http://localhost:3000/api/v1/points/2 HTTP/1.1
+
+###
+POST http://localhost:3000/api/v1/points HTTP/1.1
+header name: header value
+
+content
