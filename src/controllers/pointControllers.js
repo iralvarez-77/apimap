@@ -1,14 +1,16 @@
-import { getAllPointsService, getOnelPointService, createNewPointService, updateOnePointService, deleteOnePointService} from '../services/pointServices.js'
+import { getAllPointsService, getOnePointService, createNewPointService, updateOnePointService, deleteOnePointService} from '../services/pointServices.js'
 
-
-export const getAllPoints =  (_req, res) => {
-  const allPoints = getAllPointsService()
-	res.json({ status: "OK", data : allPoints});
+export const getAllPoints =  ( req, res) => {
+  const { time } = req.query
+  console.log(time);
+  // const allPoints = getAllPointsService()
+	res.json({ status: "OK" });
 }
 
-export const getOnelPoint = (req, res) => {
-	console.log(req.params.pointId);
-	res.send("get an existing point");
+export const getOnePoint = (req, res) => {
+  const { pointId } = req.params
+  const onePoint = getOnePointService( pointId )
+	res.json({status : "OK", data: onePoint});
 }
 
 export const createNewPoint = (req, res) => {
