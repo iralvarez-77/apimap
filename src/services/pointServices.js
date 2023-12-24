@@ -1,7 +1,7 @@
 import { getAllPointsDB, getOnePointsDB } from '../database/point.js'
 
-export const getAllPointsService =  () => {
-  return getAllPointsDB()
+export const getAllPointsService =  (time) => {
+  return getAllPointsDB(time)
 }
 
 export const getOnePointService = ( pointId ) => {

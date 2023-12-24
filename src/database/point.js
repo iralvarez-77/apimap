@@ -1,8 +1,11 @@
 import DB from './db.json' assert { type: 'json' }
 
-const data = DB.points
+let data = DB.points
 
-export const getAllPointsDB = ( ) => {
+export const getAllPointsDB = ( time ) => {
+  if (time) 
+    return data.filter( point => point.time.toLocaleLowerCase().includes(time.toLocaleLowerCase()) )
+
   return data;
 };
 
