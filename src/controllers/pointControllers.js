@@ -1,4 +1,4 @@
-import { getAllPointsService, getOnePointService, createNewPointService, updateOnePointService, deleteOnePointService} from '../services/pointServices.js'
+import { getAllPointsService, getOnePointService, createNewPointService, updateOnePointService, deleteOnePointService} from "../services/pointServices.js"
 
 export const getAllPoints =  (req, res) => {
   const { time } = req.query
@@ -13,7 +13,15 @@ export const getOnePoint = (req, res) => {
 }
 
 export const createNewPoint = (req, res) => {
-	res.send("create a new point");
+  const { lat, long } = req.body
+  if ( !lat || !long ) return 
+  
+  const body = {
+    lat,
+    long
+  }
+  const newPoint = createNewPointService(body)
+  res.json({ status: 201, data: newPoint})
 }
 
 export const updateOnePoint = (req, res) => {

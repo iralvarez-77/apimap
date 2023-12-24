@@ -13,7 +13,10 @@ PATCH http://localhost:3000/api/v1/points/2
 DELETE http://localhost:3000/api/v1/points/2 HTTP/1.1
 
 ###
-POST http://localhost:3000/api/v1/points HTTP/1.1
-header name: header value
+POST http://localhost:3000/api/v1/points
+content-type: application/json
 
-content
+{
+  "lat": 4.117,
+  "long": 55.75
+}
