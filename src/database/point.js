@@ -1,6 +1,10 @@
-import DB from "./db.json" assert { type: "json" }
+import { createRequire } from "module";
+// import DB from "./db.json" assert { type: "json" }
 import saveToDataBase from "./utils.js"
 
+//creando mi propio require en EsModule
+const require = createRequire(import.meta.url)
+const DB = require("./db.json")
 let data = DB.points
 
 export const getAllPointsDB = ( time ) => {
