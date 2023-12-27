@@ -7,7 +7,12 @@ GET http://localhost:3000/api/v1/points?time=2023-12-19T01:43:24.519Z
 GET http://localhost:3000/api/v1/points/4a3d9aaa-608c-49a7-a004-66305ad4ab50
 
 ###
-PATCH http://localhost:3000/api/v1/points/2
+PATCH http://localhost:3000/api/v1/points/31520713-7026-4cd1-8ae2-6348e0d764d8
+content-type: application/json
+
+{
+  "lat": 4.12
+}
 
 ###
 DELETE http://localhost:3000/api/v1/points/2 HTTP/1.1
@@ -18,5 +23,5 @@ content-type: application/json
 
 {
   "lat": 4.117,
-  "long": 59.75
+  "long": 59.79
 }

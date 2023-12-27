@@ -1,4 +1,4 @@
-import { getAllPointsDB, getOnePointsDB, createNewPointDB } from "../database/point.js"
+import { getAllPointsDB, getOnePointsDB, createNewPointDB, updateOnePointDB } from "../database/point.js"
 import crypto from "node:crypto"
 
 export const getAllPointsService =  (time) => {
@@ -17,15 +17,15 @@ export const createNewPointService = (body) => {
     ...body,
     time: new Date().toISOString(),
     createdAt: new Date(),
-    updateAt: new Date(),
+    updatedAt: new Date(),
   }
 
   return createNewPointDB( payload )
 }
 
-export const updateOnePointService = ( ) => {
-  console.log("getAllPointsService");
-	
+export const updateOnePointService = ({...params}) => {
+
+	return updateOnePointDB({...params})
 }
 
 export const deleteOnePointService =  ( ) => {

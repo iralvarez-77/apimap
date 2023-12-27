@@ -22,10 +22,14 @@ export const createNewPoint = (req, res) => {
   }
   const newPoint = createNewPointService(body)
   res.json({ status: 201, data: newPoint})
+  //si el objeto existe retornar un 409 conflict 
 }
 
 export const updateOnePoint = (req, res) => {
-	res.send("update an existing point");
+  const { body, params: { pointId } } = req
+  const updatedPoint = updateOnePointService({ pointId, body })
+  res.json({ status: 200, data: updatedPoint})
+  //si no quieres retornar el contenido utiliza un 204 No content indicando que la solicitud fue exitosa. 
 }
 
 export const deleteOnePoint =  (req, res) => {

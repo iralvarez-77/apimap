@@ -21,8 +21,25 @@ export const getOnePointsDB = ( pointId ) => {
 export const createNewPointDB = ( payload ) => {
   //verificar si esta en la base de datos
   const isAlreadyAdded = data.findIndex( element => element.lat === payload.lat || element.long === payload.long )
-  if ( isAlreadyAdded > -1 ) return "ya existe"
+  if ( isAlreadyAdded > -1 ) return "El recurso ya existe"
   data.push(payload)
   saveToDataBase( DB )
   return payload
+}
+export const updateOnePointDB = ( payload ) => {
+  //verificar si esta en la base de datos
+  const isAlreadyAdded = data.findIndex( element => element.id === payload.pointId )
+    if ( isAlreadyAdded === -1 ) return "Recurso no encontrado"
+  
+    const updatedPoint = {
+      ...data[isAlreadyAdded],
+      ...payload.body,
+      updatedAt: new Date()
+    }
+    console.log("🚀updatedPoint:", updatedPoint)
+
+    data[isAlreadyAdded] = updatedPoint
+
+  saveToDataBase( DB )
+  return updatedPoint
 }
