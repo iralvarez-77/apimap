@@ -33,7 +33,9 @@ export const updateOnePoint = (req, res) => {
 }
 
 export const deleteOnePoint =  (req, res) => {
-	res.send("delete an existing point");
+  const {pointId } = req.params
+  const deletedPoint = deleteOnePointService( pointId)
+  res.json({status: 204, data: deletedPoint})
 }
 
 

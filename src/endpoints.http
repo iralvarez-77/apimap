@@ -15,13 +15,13 @@ content-type: application/json
 }
 
 ###
-DELETE http://localhost:3000/api/v1/points/2 HTTP/1.1
+DELETE http://localhost:3000/api/v1/points/61dbae02-c147-4e28-863c-db7bd402b2d6 HTTP/1.1
 
 ###
 POST http://localhost:3000/api/v1/points
 content-type: application/json
 
 {
-  "lat": 4.117,
-  "long": 59.79
+  "lat": 45.17,
+  "long": 55.75
 }

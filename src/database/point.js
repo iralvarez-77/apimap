@@ -54,3 +54,12 @@ export const updateOnePointDB = ( payload ) => {
   saveToDataBase( DB )
   return updatedPoint
 }
+
+export const deleteOnePointDB = ( pointId ) => {
+  const indexOfPoint = data.findIndex( element => element.id === pointId )
+  if (indexOfPoint === -1) return "no existe"
+
+  data.splice(indexOfPoint, 1)
+  saveToDataBase(DB)
+  return "Eliminado con éxito"
+}

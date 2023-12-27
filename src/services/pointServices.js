@@ -1,5 +1,4 @@
-import { getAllPointsDB, getOnePointsDB, createNewPointDB, updateOnePointDB } from "../database/point.js"
-
+import { getAllPointsDB, getOnePointsDB, createNewPointDB, updateOnePointDB, deleteOnePointDB } from "../database/point.js"
 
 export const getAllPointsService =  (time) => {
   return getAllPointsDB(time)
@@ -18,9 +17,8 @@ export const updateOnePointService = ({...params}) => {
 	return updateOnePointDB({...params})
 }
 
-export const deleteOnePointService =  ( ) => {
-  console.log("getAllPointsService");
-
+export const deleteOnePointService =  ( pointId) => {
+  return deleteOnePointDB(pointId)
 }
 
 
