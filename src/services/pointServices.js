@@ -1,12 +1,11 @@
 import { getAllPointsDB, getOnePointsDB, createNewPointDB, updateOnePointDB, deleteOnePointDB } from "../database/point.js"
 
-export const getAllPointsService =  (time) => {
-  return getAllPointsDB(time)
+export const getAllPointsService = async ({time}) => {
+  return await getAllPointsDB({time})
 }
 
 export const getOnePointService = ( pointId ) => {
   return getOnePointsDB( pointId )
-
 }
 
 export const createNewPointService = (body) => {

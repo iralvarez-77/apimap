@@ -8,11 +8,27 @@ const require = createRequire(import.meta.url)
 const DB = require("./db.json")
 let data = DB.points
 
-export const getAllPointsDB = ( time ) => {
-  if (time) 
-    return data.filter( point => point.time.toLocaleLowerCase() === time.toLocaleLowerCase())
-
-  return data;
+export const getAllPointsDB = async ( {time} ) => {
+  try {
+    if (time) {
+      const filtered = await data.filter( point => point.time.toLocaleLowerCase() === time.toLocaleLowerCase())
+      return {
+        status:200,
+        data: filtered
+      }
+    }
+    //TODO: building a function 
+    return {
+      status:200,
+      data
+    }
+  } catch (error){
+    console.log("error", error);
+    return {
+      status : 500,
+      data: error
+    }
+  }
 };
 
 export const getOnePointsDB = ( pointId ) => {

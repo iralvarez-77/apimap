@@ -1,9 +1,9 @@
 import { getAllPointsService, getOnePointService, createNewPointService, updateOnePointService, deleteOnePointService} from "../services/pointServices.js"
 
-export const getAllPoints =  (req, res) => {
+export const getAllPoints =  async (req, res) => {
   const { time } = req.query
-  const allPoints = getAllPointsService(time)
-	res.json({ status: "OK", data: allPoints });
+  const { status, data } = await getAllPointsService({ time })
+	res.json({ status, data });
 }
 
 export const getOnePoint = (req, res) => {
