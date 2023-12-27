@@ -1,6 +1,7 @@
 import { createRequire } from "module";
 // import DB from "./db.json" assert { type: "json" }
 import saveToDataBase from "./utils.js"
+import crypto from "node:crypto"
 
 //creando mi propio require en EsModule
 const require = createRequire(import.meta.url)
@@ -18,7 +19,16 @@ export const getOnePointsDB = ( pointId ) => {
   return data.find( point => point.id === pointId )
 };
 
-export const createNewPointDB = ( payload ) => {
+export const createNewPointDB = ( body ) => {
+
+  const payload = {
+    id: crypto.randomUUID(),
+    ...body,
+    time: new Date().toISOString(),
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  }
+
   //verificar si esta en la base de datos
   const isAlreadyAdded = data.findIndex( element => element.lat === payload.lat || element.long === payload.long )
   if ( isAlreadyAdded > -1 ) return "El recurso ya existe"
@@ -26,6 +36,7 @@ export const createNewPointDB = ( payload ) => {
   saveToDataBase( DB )
   return payload
 }
+
 export const updateOnePointDB = ( payload ) => {
   //verificar si esta en la base de datos
   const isAlreadyAdded = data.findIndex( element => element.id === payload.pointId )
