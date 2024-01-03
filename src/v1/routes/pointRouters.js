@@ -1,5 +1,10 @@
 import { Router } from 'express';
-import { getAllPoints, getOnePoint, updateOnePoint, createNewPoint, deleteOnePoint } from '../../controllers/pointControllers.js';
+import { 
+  getAllPoints, 
+  getOnePoint, updateOnePoint, 
+  createNewPoint, 
+  deleteOnePoint } from '../../controllers/pointControllers.js';
+
 const router = Router();
 
 router.get( '/', getAllPoints );
