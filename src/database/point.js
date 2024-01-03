@@ -8,7 +8,7 @@ const require = createRequire(import.meta.url)
 const DB = require("./db.json")
 let data = DB.points
 
-export const getAllPointsDB = async ( {time} ) => {
+export const getAllPointsDB = async ({time}) => {
   try {
     if (time) {
       const filtered = await data.filter( point => point.time.toLocaleLowerCase() === time.toLocaleLowerCase())
