@@ -12,7 +12,7 @@ export const getOnePoint = (req, res) => {
 	res.json({status : "OK", data: onePoint});
 }
 
-export const createNewPoint = (req, res) => {
+export const createNewPoint = async (req, res) => {
   const { lat, long } = req.body
   if ( !lat || !long ) return 
   
@@ -20,7 +20,7 @@ export const createNewPoint = (req, res) => {
     lat,
     long
   }
-  const newPoint = createNewPointService(body)
+  const newPoint = await createNewPointService(body)
   res.json({ status: 201, data: newPoint})
   //si el objeto existe retornar un 409 conflict 
 }

@@ -8,8 +8,8 @@ export const getOnePointService = ( pointId ) => {
   return getOnePointsDB( pointId )
 }
 
-export const createNewPointService = (body) => {
-  return createNewPointDB( body )
+export const createNewPointService = async (body) => {
+  return await createNewPointDB( body )
 }
 
 export const updateOnePointService = ({...params}) => {

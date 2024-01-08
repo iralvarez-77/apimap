@@ -1,5 +1,5 @@
 
-GET http://localhost:3000/api/v1/points
+GET http://localhost:3030/api/v1/points
 
 ###
 GET http://localhost:3000/api/v1/points?time=2023-12-24T21:08:43.121Z
@@ -8,12 +8,12 @@ GET http://localhost:3000/api/v1/points?time=2023-12-24T21:08:43.121Z
 GET http://localhost:3000/api/v1/points/4a3d9aaa-608c-49a7-a004-66305ad4ab50
 
 ###
-POST http://localhost:3000/api/v1/points
+POST http://localhost:3030/api/v1/points
 content-type: application/json
 
 {
   "lat": 45.17,
-  "long": 55.75
+  "long": 58.75
 }
 
 ###

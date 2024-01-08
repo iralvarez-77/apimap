@@ -1,10 +1,12 @@
 import { createRequire } from "module";
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb"
+import { docClient } from '../common/index.js';
+import dayjs from 'dayjs';
 // import DB from "./db.json" assert { type: "json" }
 import saveToDataBase from "./utils.js"
 import crypto from "node:crypto"
 
-const AWS = require('aws-sdk');
-const dynamodb = new AWS.DynamoDB();
+const client = new DynamoDBClient();
 
 //creando mi propio require en EsModule
 const require = createRequire(import.meta.url)
@@ -38,22 +40,47 @@ export const getOnePointsDB = ( pointId ) => {
   return data.find( point => point.id === pointId )
 };
 
-export const createNewPointDB = ( body ) => {
+export const createNewPointDB = async ( body ) => {
+  const now = dayjs().format();
+
+console.log("🚀body:", body)
 
   const payload = {
-    id: crypto.randomUUID(),
+    id: "2fe32c58-b800-42ba-8c6f-b480cd16ca54",
+    // id: crypto.randomUUID(),
     ...body,
-    time: new Date().toISOString(),
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    createdAt: now,
+    updatedAt: now,
   }
 
-  //verificar si esta en la base de datos
-  const isAlreadyAdded = data.findIndex( element => element.lat === payload.lat || element.long === payload.long )
-  if ( isAlreadyAdded > -1 ) return "El recurso ya existe"
-  data.push(payload)
-  saveToDataBase( DB )
+  const params = {
+    TableName: process.env.TABLENAME,
+    Item: payload,
+    ConditionExpression: 'attribute_not_exists(#pk)',
+    ExpressionAttributeNames: { '#pk': 'id' },
+    ReturnValues: "ALL_OLD"
+  }
+
+  // Crear el nuevo item en la tabla
+// const command = new PutItemCommand(params);
+
+try {
+  const data = await docClient.put(params);
+  console.log('Item creado con éxito:', data);
   return payload
+} catch (err) {
+  console.error('Error al crear el item:', err);
+  return err
+}
+
+  
+
+  //verificar si esta en la base de datos
+  // const isAlreadyAdded = data.findIndex( element => element.lat === payload.lat || element.long === payload.long )
+  // if ( isAlreadyAdded > -1 ) return "El recurso ya existe"
+  // data.push(payload)
+  // saveToDataBase( DB )
+  // return payload
 }
 
 export const updateOnePointDB = ( payload ) => {
