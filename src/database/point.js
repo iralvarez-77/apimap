@@ -46,8 +46,8 @@ export const createNewPointDB = async ( body ) => {
 console.log("🚀body:", body)
 
   const payload = {
-    id: "2fe32c58-b800-42ba-8c6f-b480cd16ca54",
-    // id: crypto.randomUUID(),
+    // id: "2fe32c58-b800-42ba-8c6f-b480cd16ca54",
+    id: crypto.randomUUID(),
     ...body,
     createdAt: now,
     updatedAt: now,
@@ -58,7 +58,7 @@ console.log("🚀body:", body)
     Item: payload,
     ConditionExpression: 'attribute_not_exists(#pk)',
     ExpressionAttributeNames: { '#pk': 'id' },
-    ReturnValues: "ALL_OLD"
+    // ReturnValues: "ALL_OLD"
   }
 
   // Crear el nuevo item en la tabla
