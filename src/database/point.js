@@ -3,6 +3,9 @@ import { createRequire } from "module";
 import saveToDataBase from "./utils.js"
 import crypto from "node:crypto"
 
+const AWS = require('aws-sdk');
+const dynamodb = new AWS.DynamoDB();
+
 //creando mi propio require en EsModule
 const require = createRequire(import.meta.url)
 const DB = require("./db.json")
