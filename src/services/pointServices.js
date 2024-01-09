@@ -16,8 +16,8 @@ export const updateOnePointService = ({...params}) => {
 	return updateOnePointDB({...params})
 }
 
-export const deleteOnePointService =  ( pointId) => {
-  return deleteOnePointDB(pointId)
+export const deleteOnePointService = async ( pointId) => {
+  return await deleteOnePointDB(pointId)
 }
 
 

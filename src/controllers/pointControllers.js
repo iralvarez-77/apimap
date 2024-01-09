@@ -32,10 +32,10 @@ export const updateOnePoint = (req, res) => {
   //si no quieres retornar el contenido utiliza un 204 No content indicando que la solicitud fue exitosa. 
 }
 
-export const deleteOnePoint =  (req, res) => {
-  const {pointId } = req.params
-  const deletedPoint = deleteOnePointService( pointId)
-  res.json({status: 204, data: deletedPoint})
+export const deleteOnePoint = async (req, res) => {
+  const { pointId } = req.params
+  await deleteOnePointService( pointId)
+  res.json({status: 204, data: "Elemento eliminado con éxito"})
 }
 
 

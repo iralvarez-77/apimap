@@ -1,12 +1,9 @@
 import { createRequire } from "module";
-// import { DynamoDBClient } from "@aws-sdk/client-dynamodb"
 import { docClient } from '../common/index.js';
 import dayjs from 'dayjs';
 // import DB from "./db.json" assert { type: "json" }
 import saveToDataBase from "./utils.js"
 import crypto from "node:crypto"
-
-// const client = new DynamoDBClient();
 
 //creando mi propio require en EsModule
 const require = createRequire(import.meta.url)
@@ -43,6 +40,8 @@ export const getOnePointsDB = async( pointId ) => {
     Key: {
       id: pointId
     },
+    //returns a set of attributes
+    // ProjectionExpression: "lat"
     //(strongly consistent)
     // ConsistentRead: true 
   }
@@ -59,9 +58,6 @@ export const getOnePointsDB = async( pointId ) => {
 
 export const createNewPointDB = async ( body ) => {
   const now = dayjs().format();
-
-console.log("🚀body:", body)
-
   const payload = {
     // id: "2fe32c58-b800-42ba-8c6f-b480cd16ca54",
     id: crypto.randomUUID(),
@@ -78,21 +74,14 @@ console.log("🚀body:", body)
     // ReturnValues: "ALL_OLD"
   }
 
-  // Crear el nuevo item en la tabla
-// const command = new PutItemCommand(params);
-
 try {
   const data = await docClient.put(params);
-  // const data = await client.send(command);
   console.log('Item creado con éxito:', data);
   return payload
 } catch (err) {
   console.error('Error al crear el item:', err);
   return err
 }
-
-  
-
   //verificar si esta en la base de datos
   // const isAlreadyAdded = data.findIndex( element => element.lat === payload.lat || element.long === payload.long )
   // if ( isAlreadyAdded > -1 ) return "El recurso ya existe"
@@ -119,11 +108,23 @@ export const updateOnePointDB = ( payload ) => {
   return updatedPoint
 }
 
-export const deleteOnePointDB = ( pointId ) => {
-  const indexOfPoint = data.findIndex( element => element.id === pointId )
-  if (indexOfPoint === -1) return "no existe"
+export const deleteOnePointDB = async ( pointId ) => {
+  const params = {
+    TableName: process.env.TABLENAME,
+    Key: {
+      id : pointId
+    },
+  }
+  try {
+    return await docClient.delete(params)
+  } catch (error) {
+    console.error("er", error)
+    return error
+  }
+  // const indexOfPoint = data.findIndex( element => element.id === pointId )
+  // if (indexOfPoint === -1) return "no existe"
 
-  data.splice(indexOfPoint, 1)
-  saveToDataBase(DB)
-  return "Eliminado con éxito"
+  // data.splice(indexOfPoint, 1)
+  // saveToDataBase(DB)
+  // return "Eliminado con éxito"
 }
