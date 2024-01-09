@@ -42,7 +42,9 @@ export const getOnePointsDB = async( pointId ) => {
     TableName: process.env.TABLENAME,
     Key: {
       id: pointId
-    }
+    },
+    //(strongly consistent)
+    // ConsistentRead: true 
   }
 
   try {
