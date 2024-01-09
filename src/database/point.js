@@ -1,12 +1,12 @@
 import { createRequire } from "module";
-import { DynamoDBClient } from "@aws-sdk/client-dynamodb"
+// import { DynamoDBClient } from "@aws-sdk/client-dynamodb"
 import { docClient } from '../common/index.js';
 import dayjs from 'dayjs';
 // import DB from "./db.json" assert { type: "json" }
 import saveToDataBase from "./utils.js"
 import crypto from "node:crypto"
 
-const client = new DynamoDBClient();
+// const client = new DynamoDBClient();
 
 //creando mi propio require en EsModule
 const require = createRequire(import.meta.url)
@@ -36,8 +36,23 @@ export const getAllPointsDB = async ({time}) => {
   }
 };
 
-export const getOnePointsDB = ( pointId ) => {
-  return data.find( point => point.id === pointId )
+export const getOnePointsDB = async( pointId ) => {
+  // return data.find( point => point.id === pointId )
+  const params = {
+    TableName: process.env.TABLENAME,
+    Key: {
+      id: pointId
+    }
+  }
+
+  try {
+    const response = await docClient.get(params)
+    console.log("response:", response)
+    return response.Item
+  } catch (error) {
+    console.error("error", error)
+    return error 
+  }
 };
 
 export const createNewPointDB = async ( body ) => {
@@ -66,6 +81,7 @@ console.log("🚀body:", body)
 
 try {
   const data = await docClient.put(params);
+  // const data = await client.send(command);
   console.log('Item creado con éxito:', data);
   return payload
 } catch (err) {

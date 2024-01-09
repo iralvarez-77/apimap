@@ -6,10 +6,10 @@ export const getAllPoints =  async (req, res) => {
 	res.json({ status, data });
 }
 
-export const getOnePoint = (req, res) => {
+export const getOnePoint = async (req, res) => {
   const { pointId } = req.params
-  const onePoint = getOnePointService( pointId )
-	res.json({status : "OK", data: onePoint});
+  const onePoint = await getOnePointService( pointId )
+	res.json({status : 200, data: onePoint});
 }
 
 export const createNewPoint = async (req, res) => {
