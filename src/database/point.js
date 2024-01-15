@@ -90,22 +90,45 @@ try {
   // return payload
 }
 
-export const updateOnePointDB = ( payload ) => {
+export const updateOnePointDB = async ({pointId, body }) => {
+  const { lat, long } = body
   //verificar si esta en la base de datos
-  const isAlreadyAdded = data.findIndex( element => element.id === payload.pointId )
-    if ( isAlreadyAdded === -1 ) return "Recurso no encontrado"
-  
-    const updatedPoint = {
-      ...data[isAlreadyAdded],
-      ...payload.body,
-      updatedAt: new Date()
+  // const isAlreadyAdded = data.findIndex( element => element.id === payload.pointId )
+  //   if ( isAlreadyAdded === -1 ) return "Recurso no encontrado"
+
+    const item = {
+      TableName: process.env.TABLENAME,
+      Key: {
+        id: pointId,
+      },
+      UpdateExpression: "SET lat = :LAT, long = :LONG",
+      ExpressionAttributeValues: {
+        ":LAT": lat,
+        ":LONG":long
+      },
+      ReturnValues: "ALL_NEW"
     }
-    console.log("🚀updatedPoint:", updatedPoint)
 
-    data[isAlreadyAdded] = updatedPoint
+    // try {
+    //   const result = await docClient.update(item)
+    //   console.log("🚀 ~ updateOnePointDB ~ result:", result)
+      
+    // } catch (error) {
+    //   console.log("🚀 ~ updateOnePointDB ~ error:", error)
+      
+    // }
+  
+  //   const updatedPoint = {
+  //     ...data[isAlreadyAdded],
+  //     ...payload.body,
+  //     updatedAt: dayjs().format()
+  //   }
+  //   console.log("🚀updatedPoint:", updatedPoint)
 
-  saveToDataBase( DB )
-  return updatedPoint
+  //   data[isAlreadyAdded] = updatedPoint
+
+  // saveToDataBase( DB )
+  // return updatedPoint
 }
 
 export const deleteOnePointDB = async ( pointId ) => {

@@ -17,11 +17,12 @@ content-type: application/json
 }
 
 ###
-PATCH http://localhost:3000/api/v1/points/31520713-7026-4cd1-8ae2-6348e0d764d8
+PATCH http://localhost:3030/api/v1/points/d1a330d6-aba0-441e-a80d-21c6cdc1f327
 content-type: application/json
 
 {
-  "lat": 4.12
+  "lat": 28.12,
+  "long": 29.13
 }
 
 ###
