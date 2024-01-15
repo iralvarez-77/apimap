@@ -13,16 +13,16 @@ content-type: application/json
 
 {
   "lat": 45.17,
-  "long": 58.75
+  "long": 55.75
 }
 
 ###
-PATCH http://localhost:3030/api/v1/points/2fe32c58-b800-42ba-8c6f-b480cd16ca54
+PATCH http://localhost:3030/api/v1/points/2fe32c58-b800-42ba-8c6f-b480cd16ca55
 content-type: application/json
 
 {
   "lat": 30.12,
-  "long": 30.13
+  "long": 32.13
 }
 
 ###

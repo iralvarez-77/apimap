@@ -108,6 +108,7 @@ export const updateOnePointDB = async ({pointId, body }) => {
         ":now": dayjs().format()
       },
       ExpressionAttributeNames: {"#lng": "long"},
+      ConditionExpression: "attribute_exists(id)",
       ReturnValues: "ALL_NEW"
     }
 
