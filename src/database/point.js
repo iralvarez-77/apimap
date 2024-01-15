@@ -107,14 +107,13 @@ export const updateOnePointDB = async ({pointId, body }) => {
         ":LG": long,
         ":now": dayjs().format()
       },
-      ExpressionAttributeNames: { "#lng": "long"},
+      ExpressionAttributeNames: {"#lng": "long"},
       ReturnValues: "ALL_NEW"
     }
 
     try {
       const data = await docClient.update(item)
       return data.Attributes
-      
     } catch (error) {
       console.log("🚀 ~ updateOnePointDB ~ error:", error)
     }

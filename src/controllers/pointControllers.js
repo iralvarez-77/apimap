@@ -25,9 +25,9 @@ export const createNewPoint = async (req, res) => {
   //si el objeto existe retornar un 409 conflict 
 }
 
-export const updateOnePoint = (req, res) => {
+export const updateOnePoint = async (req, res) => {
   const { body, params: { pointId } } = req
-  const updatedPoint = updateOnePointService({ pointId, body })
+  const updatedPoint = await  updateOnePointService({ pointId, body })
   res.json({ status: 200, data: updatedPoint})
   //si no quieres retornar el contenido utiliza un 204 No content indicando que la solicitud fue exitosa. 
 }
