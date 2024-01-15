@@ -109,14 +109,14 @@ export const updateOnePointDB = async ({pointId, body }) => {
       ReturnValues: "ALL_NEW"
     }
 
-    // try {
-    //   const result = await docClient.update(item)
-    //   console.log("🚀 ~ updateOnePointDB ~ result:", result)
+    try {
+      const result = await docClient.update(item)
+      console.log("🚀 ~ updateOnePointDB ~ result:", result)
       
-    // } catch (error) {
-    //   console.log("🚀 ~ updateOnePointDB ~ error:", error)
+    } catch (error) {
+      console.log("🚀 ~ updateOnePointDB ~ error:", error)
       
-    // }
+    }
   
   //   const updatedPoint = {
   //     ...data[isAlreadyAdded],
