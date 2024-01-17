@@ -89,10 +89,16 @@ export const createNewPointDB = async ( body ) => {
 try {
   const data = await docClient.put(params);
   console.log('Item creado con éxito:', data);
-  return payload
+  return {
+    status: 201,
+    data : payload
+  }
 } catch (err) {
   console.error('Error al crear el item:', err);
-  return err
+  return {
+    status: err.$metadata.httpStatusCode,
+    data: err.name
+  }
 }
   //verificar si esta en la base de datos
   // const isAlreadyAdded = data.findIndex( element => element.lat === payload.lat || element.long === payload.long )
