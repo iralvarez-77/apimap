@@ -1,9 +1,9 @@
 import { createRequire } from "module";
 import { docClient } from '../common/index.js';
 import dayjs from 'dayjs';
-// import DB from "./db.json" assert { type: "json" }
-import saveToDataBase from "./utils.js"
 import crypto from "node:crypto"
+// import DB from "./db.json" assert { type: "json" }
+// import saveToDataBase from "./utils.js"
 
 //creando mi propio require en EsModule
 const require = createRequire(import.meta.url)
@@ -138,12 +138,20 @@ export const deleteOnePointDB = async ( pointId ) => {
     Key: {
       id : pointId
     },
+    ConditionExpression: "attribute_exists(id)"
   }
   try {
-    return await docClient.delete(params)
+    await docClient.delete(params)
+    return {
+      status: 204,
+      data : "Elemento eliminado con éxito"
+    }
   } catch (error) {
     console.error("er", error)
-    return error
+    return {
+      status: error.$metadata.httpStatusCode,
+      data: error.name
+    }
   }
   // const indexOfPoint = data.findIndex( element => element.id === pointId )
   // if (indexOfPoint === -1) return "no existe"

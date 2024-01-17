@@ -34,8 +34,8 @@ export const updateOnePoint = async (req, res) => {
 
 export const deleteOnePoint = async (req, res) => {
   const { pointId } = req.params
-  await deleteOnePointService( pointId)
-  res.json({status: 204, data: "Elemento eliminado con éxito"})
+  const {status, data} = await deleteOnePointService( pointId )
+  res.json({ status, data })
 }
 
 

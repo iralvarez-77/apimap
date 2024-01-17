@@ -26,5 +26,5 @@ content-type: application/json
 }
 
 ###
-DELETE http://localhost:3030/api/v1/points/5d9a3f2b-b2df-48fc-a580-b84bf82d485b HTTP/1.1
+DELETE http://localhost:3030/api/v1/points/1dd5a1bd-2d34-403f-bfe2-579c78c8cc5e HTTP/1.1
 
