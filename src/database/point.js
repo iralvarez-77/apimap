@@ -27,8 +27,8 @@ export const getAllPointsDB = async ({time}) => {
   } catch (error){
     console.log("error", error);
     return {
-      status : 500,
-      data: error
+      status : error.$metadata.httpStatusCode,
+      data: error.name
     }
   }
 };
