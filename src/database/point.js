@@ -55,10 +55,16 @@ export const getOnePointsDB = async( pointId ) => {
   try {
     const response = await docClient.get(params)
     console.log("response:", response)
-    return response.Item
+    return {
+      status: 200,
+      data : response.Item
+    }
   } catch (error) {
     console.error("error", error)
-    return error 
+    return {
+      status: error.$metadata.httpStatusCode,
+      data: error.name
+    } 
   }
 };
 
