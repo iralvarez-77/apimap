@@ -11,13 +11,19 @@ const DB = require("./db.json")
 let data = DB.points
 
 export const getAllPointsDB = async ({time}) => {
+
   try {
-    if (time) {
-      const filtered = await data.filter( point => point.time.toLocaleLowerCase() === time.toLocaleLowerCase())
-      return {
-        status:200,
-        data: filtered
-      }
+    // if (time) {
+    //   const filtered = await data.filter( point => point.time.toLocaleLowerCase() === time.toLocaleLowerCase())
+    //   return {
+    //     status:200,
+    //     data: filtered
+    //   }
+    // }
+
+    const params = {
+      TableName: process.env.TABLENAME,
+      Item: ""
     }
     //TODO: building a function 
     return {
