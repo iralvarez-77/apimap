@@ -1,4 +1,4 @@
-import { getAllPointsService, getOnePointService, createNewPointService, updateOnePointService, deleteOnePointService} from "../services/pointServices.js"
+import { getAllPointsService, getOnePointService, createNewPointService, updateOnePointService, deleteOnePointService } from "../services/pointServices.js"
 
 export const getAllPoints =  async (req, res) => {
   const { time } = req.query
@@ -8,8 +8,8 @@ export const getAllPoints =  async (req, res) => {
 
 export const getOnePoint = async (req, res) => {
   const { pointId } = req.params
-  const onePoint = await getOnePointService( pointId )
-	res.json({status : 200, data: onePoint});
+  const { status, data } = await getOnePointService( pointId )
+	res.json({status, data});
 }
 
 export const createNewPoint = async (req, res) => {
@@ -20,15 +20,15 @@ export const createNewPoint = async (req, res) => {
     lat,
     long
   }
-  const newPoint = await createNewPointService(body)
-  res.json({ status: 201, data: newPoint})
+  const { status, data } = await createNewPointService(body)
+  res.json({{status, data}})
   //si el objeto existe retornar un 409 conflict 
 }
 
 export const updateOnePoint = async (req, res) => {
   const { body, params: { pointId } } = req
-  const updatedPoint = await  updateOnePointService({ pointId, body })
-  res.json({ status: 200, data: updatedPoint})
+  const { status, data } = await  updateOnePointService({ pointId, body })
+  res.json({ status, data })
   //si no quieres retornar el contenido utiliza un 204 No content indicando que la solicitud fue exitosa. 
 }
 

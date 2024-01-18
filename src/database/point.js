@@ -132,9 +132,15 @@ export const updateOnePointDB = async ({pointId, body }) => {
 
     try {
       const data = await docClient.update(item)
-      return data.Attributes
+      return {
+        status: 200,
+        data : data.Attributes
+      }
     } catch (error) {
-      console.log("🚀 ~ updateOnePointDB ~ error:", error)
+      return {
+        status: error.$metadata.httpStatusCode,
+        data: error.name
+      }
     }
   
   //   const updatedPoint = {
