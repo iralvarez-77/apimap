@@ -21,7 +21,7 @@ export const createNewPoint = async (req, res) => {
     long
   }
   const { status, data } = await createNewPointService(body)
-  res.json({{status, data}})
+  res.json({status, data})
   //si el objeto existe retornar un 409 conflict 
 }
 
