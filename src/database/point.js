@@ -10,7 +10,7 @@ const require = createRequire(import.meta.url)
 const DB = require("./db.json")
 let data = DB.points
 
-export const getAllPointsDB = async ({time}) => {
+export const getAllPointsDB = async () => {
 
   try {
     // if (time) {
@@ -20,15 +20,21 @@ export const getAllPointsDB = async ({time}) => {
     //     data: filtered
     //   }
     // }
-
     const params = {
       TableName: process.env.TABLENAME,
-      Item: ""
+      /* recuperando atributos específicos de primer nivel
+      con una palabra reservada de dynamo
+      */
+      ProjectionExpression: "lat, #lng",
+      ExpressionAttributeNames: {"#lng": "long"}
+
     }
     //TODO: building a function 
+    const { Items } = await docClient.scan(params)
     return {
       status:200,
-      data
+      data: Items,
+      Headers: 'Access-Control-Allow-Origin'
     }
   } catch (error){
     console.log("error", error);

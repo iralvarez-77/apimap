@@ -1,10 +1,12 @@
 import express from "express"
 import routerV1 from "./v1/routes/pointRouters.js";
 import responseTime from "response-time"
+import cors from 'cors'
 
 const app = express()
 
 app.disable("x-powered-by")
+app.use(cors())
 
 const PORT = process.env.PORT || 3001
 
