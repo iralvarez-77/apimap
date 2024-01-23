@@ -46,31 +46,38 @@ export const getAllPointsDB = async () => {
 };
 
 export const getOnePointsDB = async( pointId ) => {
-  // return data.find( point => point.id === pointId )
-  const params = {
-    TableName: process.env.TABLENAME,
-    Key: {
-      id: pointId
-    },
-    //returns a set of attributes
-    // ProjectionExpression: "lat"
-    //(strongly consistent)
-    // ConsistentRead: true 
-  }
+  const result = await data.find( point => point.id === pointId )
+  // const params = {
+  //   TableName: process.env.TABLENAME,
+  //   Key: {
+  //     id: pointId
+  //   },
+  //   //returns a set of attributes
+  //   // ProjectionExpression: "lat"
+  //   //(strongly consistent)
+  //   // ConsistentRead: true 
+  // }
 
   try {
-    const response = await docClient.get(params)
-    console.log("response:", response)
+    // const response = await docClient.get(params)
+    // return {
+    //   status: 200,
+    //   data : response.Item
+    // }
     return {
       status: 200,
-      data : response.Item
+      data : result
     }
   } catch (error) {
     console.error("error", error)
     return {
-      status: error.$metadata.httpStatusCode,
-      data: error.name
+      status: 500,
+      data: error
     } 
+    // return {
+    //   status: error.$metadata.httpStatusCode,
+    //   data: error.name
+    // } 
   }
 };
 

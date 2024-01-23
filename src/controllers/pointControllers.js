@@ -9,7 +9,7 @@ export const getAllPoints =  async (req, res) => {
 export const getOnePoint = async (req, res) => {
   const { pointId } = req.params
   const { status, data } = await getOnePointService( pointId )
-	res.json({status, data});
+	res.send({status, data});
 }
 
 export const createNewPoint = async (req, res) => {

@@ -5,7 +5,7 @@ GET http://localhost:3030/api/v1/points
 GET http://localhost:3030/api/v1/points?time=2023-12-24T21:08:43.121Z
 
 ###
-GET http://localhost:3030/api/v1/points/2fe32c58-b800-42ba-8c6f-b480cd16ca54
+GET http://localhost:3030/api/v1/points/dc1a2a4e-29f5-44d9-ab36-eb818ffd29b7
 
 ###
 POST http://localhost:3030/api/v1/points
@@ -28,3 +28,7 @@ content-type: application/json
 ###
 DELETE http://localhost:3030/api/v1/points/1dd5a1bd-2d34-403f-bfe2-579c78c8cc5e HTTP/1.1
 
+
+
+
+https://gpbrmjzc-3030.brs.devtunnels.ms/
